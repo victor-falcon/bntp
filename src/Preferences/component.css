@@ -11,6 +11,7 @@ dialog.Preferences {
   border-style: none;
   border-radius: var(--size-form-control-border-radius);
   box-shadow: 0 0 var(--size-wide-gap) rgba(0, 0, 0, 0.5);
+  padding-top: 0!important;
 }
 
 dialog.Preferences::backdrop {

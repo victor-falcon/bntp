@@ -1,12 +1,12 @@
 :root /* standard */ {
-  --theme-palette-03: #2b2b2b;
-  --theme-palette-02: #363636;
-  --theme-palette-01: #6e6e6e;
-  --theme-palette-00: #7b7b7b;
-  --theme-palette-0: #949494;
-  --theme-palette-1: #bbbbbb;
-  --theme-palette-2: #eeeeee;
-  --theme-palette-3: #fdfdfd;
+  --theme-palette-03: #191919;
+  --theme-palette-02: #3d3839;
+  --theme-palette-01: #8e8e8e;
+  --theme-palette-00: #bbbbbb;
+  --theme-palette-0: #c8c8c8;
+  --theme-palette-1: #d5d1cf;
+  --theme-palette-2: #e8e4e1;
+  --theme-palette-3: #f5f2ef;
 }
 
 :root[data-theme="solarized"] {
