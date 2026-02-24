@@ -16,7 +16,7 @@ const App: FC = () => {
       {toggles?.topSites ? (
         <div className="App__Header">
           <TopSitesComponent search={search} />
-          <SearchComponent value={search} onChange={setSearch} />
+          {/* <SearchComponent value={search} onChange={setSearch} /> */}
         </div>
       ) : null}
       {toggles?.bookmarks ? <BookmarksComponent search={search} /> : null}

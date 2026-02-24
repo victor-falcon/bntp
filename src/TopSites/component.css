@@ -16,7 +16,6 @@
 
   overflow-x: hidden;
   border-radius: 3px;
-  background-color: var(--palette-2);
 }
 
 .TopSiteButton {
@@ -24,7 +23,7 @@
   width: var(--size-folder-item-width);
   height: var(--size-folder-item-height);
   border-radius: 3px;
-  background-color: var(--palette-3);
+  background-color: var(--palette-2);
 }
 
 .TopSiteButton:hover {

@@ -7,7 +7,14 @@
 .App__Header {
   display: grid;
   column-gap: var(--size-gap);
-  grid-template-columns: auto 150px;
+  grid-template-columns: 1fr auto;
+}
+
+@media (max-width: 480px) {
+  .App__Header {
+    grid-template-columns: 1fr;
+    row-gap: var(--size-gap);
+  }
 }
 
 .App__Footer {

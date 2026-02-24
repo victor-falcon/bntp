@@ -4,8 +4,8 @@
   --size-folder-padding-y: var(--size-gap);
   --size-folder-indent: 60px;
   --size-folder-item-gap: var(--size-gap);
-  --size-folder-item-width: 150px;
-  --size-folder-item-height: 40px;
+  --size-folder-item-min-width: 200px;
+  --size-folder-item-height: 60px;
   --size-icon: 16px;
   --size-edit-button: 21px;
 }
@@ -26,13 +26,24 @@
   margin-left: calc(var(--size-folder-indent) * var(--depth));
 }
 
+@media (max-width: 600px) {
+  .BookmarkFolders {
+    --size-folder-indent: 20px;
+    --size-folder-padding-x: var(--size-gap);
+  }
+}
+
 .BookmarkFolder {
   display: grid;
-  grid-template-columns: repeat(auto-fill, var(--size-folder-item-width));
+  grid-template-columns: repeat(auto-fill, minmax(var(--size-folder-item-min-width), 1fr));
   gap: var(--size-folder-item-gap);
   padding: var(--size-folder-padding-y) var(--size-folder-padding-x);
   border-radius: 3px;
-  background-color: var(--palette-2);
+}
+
+.BookmarkFolder__Heading {
+  grid-column: 1 / -1;
+  padding: 10px 0;
 }
 
 .BookmarkFolder__Heading > button {
@@ -74,15 +85,10 @@
   gap: var(--size-folder-item-gap);
 
   height: var(--size-folder-item-height);
-  padding: var(--size-folder-item-gap);
+  padding: 10px;
   overflow: hidden;
-  border-radius: 3px;
-  background-color: var(--palette-3);
-}
-
-.BookmarkButton:not([data-drag-active]):hover {
+  border-radius: 8px;
   background-color: var(--palette-2);
-  box-shadow: 0 0 calc(var(--size-folder-item-gap) * 3) var(--palette-01);
 }
 
 .BookmarkButton__Title {
