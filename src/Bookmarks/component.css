@@ -152,11 +152,15 @@ button.BookmarkEditButton {
   opacity: 1;
 }
 
+.BookmarkButton:hover {
+  background-color: color-mix(in srgb, var(--palette-2), var(--palette-03) 15%);
+}
+
 .BookmarkEditButton:hover,
 .BookmarkEditButton:focus-visible {
   visibility: visible;
   opacity: 1;
-  background-color: var(--palette-2);
-  box-shadow: 0 0 calc(var(--size-folder-item-gap) * 3) var(--palette-01);
+  background-color: color-mix(in srgb, var(--palette-2), var(--palette-03) 15%);
+  color: var(--palette-01);
   transition: none;
 }

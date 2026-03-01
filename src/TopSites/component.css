@@ -8,27 +8,31 @@
 }
 
 .TopSites {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, var(--size-folder-item-width));
+  display: flex;
+  flex-wrap: nowrap;
   gap: var(--size-folder-item-gap);
   padding: var(--size-folder-padding-y) var(--size-folder-padding-x);
   min-height: calc(var(--size-folder-item-height));
 
-  overflow-x: hidden;
+  overflow: hidden;
   border-radius: 3px;
+}
+
+.TopSite {
+  flex: 1;
+  min-width: 0;
 }
 
 .TopSiteButton {
   display: grid;
-  width: var(--size-folder-item-width);
+  width: 100%;
   height: var(--size-folder-item-height);
   border-radius: 3px;
   background-color: var(--palette-2);
 }
 
 .TopSiteButton:hover {
-  background-color: var(--palette-2);
-  box-shadow: 0 0 calc(var(--size-folder-item-gap) * 3) var(--palette-01);
+  background-color: color-mix(in srgb, var(--palette-2), var(--palette-03) 15%);
 }
 
 .TopSiteButton__Icon {
