@@ -2,6 +2,7 @@ import './component.css'
 import type React from 'react'
 import { type Dispatch, type FC, type PropsWithChildren, useContext, useState } from 'react'
 import BookmarkEditorComponent from '../BookmarkEditor/component'
+import ContextMenuComponent from '../ContextMenu/component'
 import { FaviconContext } from '../infrastructure/favicon'
 import LinkComponent from '../Link/component'
 import ShortcutKeyComponent from '../ShortcutKey/component'
@@ -9,7 +10,7 @@ import type { ShortcutMap } from '../ShortcutKey/model'
 import { useShortcutMap } from '../ShortcutKey/repository'
 import { useToggles } from '../Toggles/repository'
 import { type Bookmark, type BookmarkFolder, type FolderCollapse, filterBookmarks, type Position } from './model'
-import { moveBookmark, useBookmarkFolders, useFolderCollapse } from './repository'
+import { moveBookmark, removeBookmark, useBookmarkFolders, useFolderCollapse } from './repository'
 import { type BookmarkWithDragProps, Drag, reorderBookmarks } from './viewmodel'
 
 type BookmarksComponentProps = {
@@ -214,10 +215,19 @@ type BookmarkComponentProps = {
 
 const BookmarkComponent: FC<BookmarkComponentProps> = ({ bookmark, shortcutMap, dragActive }) => {
   const [openBookmarkEditor, setOpenBookmarkEditor] = useState(false)
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null)
+  const [shortcutMapValue, setShortcutMap] = useShortcutMap()
   const favicon = useContext(FaviconContext)
   const shortcutKey = shortcutMap.getByBookmarkID(bookmark.id)
   return (
-    <div className="Bookmark">
+    <div
+      role="none"
+      className="Bookmark"
+      onContextMenu={(e) => {
+        e.preventDefault()
+        setContextMenu({ x: e.clientX, y: e.clientY })
+      }}
+    >
       <LinkComponent href={bookmark.url}>
         <div className="BookmarkButton" data-drag-active={dragActive} draggable>
           <div className="BookmarkButton__Title">{bookmark.title}</div>
@@ -243,6 +253,28 @@ const BookmarkComponent: FC<BookmarkComponentProps> = ({ bookmark, shortcutMap, 
         shortcutKey={shortcutKey}
         onRequestClose={() => setOpenBookmarkEditor(false)}
       />
+      {contextMenu && (
+        <ContextMenuComponent
+          position={contextMenu}
+          onClose={() => setContextMenu(null)}
+          items={[
+            {
+              label: 'Update',
+              onClick: () => setOpenBookmarkEditor(true),
+            },
+            {
+              label: 'Delete',
+              onClick: () => {
+                if (window.confirm(`Are you sure you want to delete "${bookmark.title}"?`)) {
+                  removeBookmark(bookmark)
+                    .then(() => setShortcutMap(shortcutMapValue.set(bookmark.id, undefined)))
+                    .catch(console.error)
+                }
+              },
+            },
+          ]}
+        />
+      )}
     </div>
   )
 }
