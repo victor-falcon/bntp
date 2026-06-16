@@ -44,6 +44,31 @@
 .BookmarkFolder__Heading {
   grid-column: 1 / -1;
   padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: var(--size-gap);
+}
+
+.BookmarkFolder__OpenAll {
+  padding: unset;
+  border: unset;
+  background: unset;
+  cursor: pointer;
+  color: var(--palette-1);
+  font-size: 120%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.25s linear;
+}
+
+.BookmarkFolder__Heading:hover .BookmarkFolder__OpenAll,
+.BookmarkFolder__OpenAll:focus-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.BookmarkFolder__OpenAll:hover {
+  color: var(--palette-01);
 }
 
 .BookmarkFolder__Heading > button {

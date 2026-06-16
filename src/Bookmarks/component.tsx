@@ -89,6 +89,7 @@ const BookmarkFolderCollapse: FC<BookmarkFolderCollapseProps> = ({
           >
             {folder.title}
           </button>
+          <OpenAllButton folder={folder} />
         </div>
       </section>
     )
@@ -106,11 +107,28 @@ const BookmarkFolderCollapse: FC<BookmarkFolderCollapseProps> = ({
         >
           {folder.title}
         </button>
+        <OpenAllButton folder={folder} />
       </div>
       {children}
     </section>
   )
 }
+
+const OpenAllButton: FC<{ folder: BookmarkFolder }> = ({ folder }) => (
+  <button
+    type="button"
+    className="BookmarkFolder__OpenAll"
+    aria-label={`Open all bookmarks in the folder: ${folder.title}`}
+    onClick={(e) => {
+      e.preventDefault()
+      for (const b of folder.bookmarks) {
+        chrome.tabs.create({ url: b.url }).catch(console.error)
+      }
+    }}
+  >
+    <span aria-hidden="true">&#10696;</span>
+  </button>
+)
 
 type BookmarkListProps = {
   folder: BookmarkFolder
