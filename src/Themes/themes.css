@@ -20,6 +20,17 @@
   --theme-palette-3: #fdf6e3;
 }
 
+:root[data-theme="glass"] {
+  --theme-palette-03: #1d1d1f;
+  --theme-palette-02: #3a3a3f;
+  --theme-palette-01: #6b6b70;
+  --theme-palette-00: #8e8e93;
+  --theme-palette-0: #c7c7cc;
+  --theme-palette-1: #d1d1d6;
+  --theme-palette-2: #e9e9ec;
+  --theme-palette-3: #f3f2f0;
+}
+
 :root[data-color-scheme="light"] {
   --palette-3: var(--theme-palette-3);
   --palette-2: var(--theme-palette-2);

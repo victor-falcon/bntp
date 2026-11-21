@@ -1,0 +1,420 @@
+/*
+ * Glass theme: matches the look of the browser's own sidebar.
+ * Resting tiles look like pinned tabs, hovered tiles like the selected tab.
+ * Every rule is scoped to :root[data-theme="glass"] so other themes are untouched.
+ */
+
+/* Tokens: light */
+:root[data-theme="glass"] {
+  --glass-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  --glass-radius: 10px;
+  --glass-radius-small: 6px;
+  --glass-radius-dialog: 14px;
+  --glass-accent: #0a84ff;
+  --glass-ink: #1d1d1f;
+  --glass-muted: #6b6b70;
+  --glass-divider: rgba(0, 0, 0, 0.1);
+
+  --glass-aurora-ground:
+    radial-gradient(900px 520px at 8% -6%, rgba(158, 172, 255, 0.55), transparent 70%),
+    radial-gradient(760px 520px at 96% 18%, rgba(130, 214, 232, 0.45), transparent 70%),
+    radial-gradient(900px 620px at 62% 108%, rgba(196, 168, 255, 0.42), transparent 70%), #eef0f8;
+  --glass-paper-ground: #f3f2f0;
+  --glass-mist-ground: #eef0f4;
+
+  --glass-translucent-tile: rgba(255, 255, 255, 0.55);
+  --glass-translucent-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.7), 0 0.5px 1px rgba(0, 0, 0, 0.05);
+  --glass-flat-tile: rgba(0, 0, 0, 0.045);
+  --glass-tile-hover: #ffffff;
+  --glass-tile-hover-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  --glass-menu: rgba(246, 246, 248, 0.82);
+  --glass-menu-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12), 0 10px 30px rgba(0, 0, 0, 0.16);
+  --glass-dialog-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12), 0 20px 50px rgba(0, 0, 0, 0.18);
+  --glass-control: rgba(0, 0, 0, 0.06);
+  --glass-control-on: #ffffff;
+}
+
+/* Tokens: dark */
+:root[data-theme="glass"][data-color-scheme="dark"] {
+  --glass-ink: #ececef;
+  --glass-muted: #a1a1aa;
+  --glass-divider: rgba(255, 255, 255, 0.12);
+  --glass-aurora-ground:
+    radial-gradient(900px 520px at 8% -6%, rgba(88, 96, 220, 0.42), transparent 70%),
+    radial-gradient(760px 520px at 96% 18%, rgba(28, 140, 170, 0.32), transparent 70%),
+    radial-gradient(900px 620px at 62% 108%, rgba(130, 80, 210, 0.36), transparent 70%), #121318;
+  --glass-paper-ground: #1e1d1c;
+  --glass-mist-ground: #18191d;
+  --glass-translucent-tile: rgba(255, 255, 255, 0.11);
+  --glass-translucent-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.25);
+  --glass-flat-tile: rgba(255, 255, 255, 0.06);
+  --glass-tile-hover: rgba(255, 255, 255, 0.16);
+  --glass-tile-hover-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.14), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --glass-menu: rgba(40, 40, 44, 0.82);
+  --glass-menu-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 10px 30px rgba(0, 0, 0, 0.45);
+  --glass-dialog-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 20px 50px rgba(0, 0, 0, 0.5);
+  --glass-control: rgba(255, 255, 255, 0.08);
+  --glass-control-on: rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="glass"][data-color-scheme="auto"] {
+    --glass-ink: #ececef;
+    --glass-muted: #a1a1aa;
+    --glass-divider: rgba(255, 255, 255, 0.12);
+    --glass-aurora-ground:
+      radial-gradient(900px 520px at 8% -6%, rgba(88, 96, 220, 0.42), transparent 70%),
+      radial-gradient(760px 520px at 96% 18%, rgba(28, 140, 170, 0.32), transparent 70%),
+      radial-gradient(900px 620px at 62% 108%, rgba(130, 80, 210, 0.36), transparent 70%), #121318;
+    --glass-paper-ground: #1e1d1c;
+    --glass-mist-ground: #18191d;
+    --glass-translucent-tile: rgba(255, 255, 255, 0.11);
+    --glass-translucent-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.25);
+    --glass-flat-tile: rgba(255, 255, 255, 0.06);
+    --glass-tile-hover: rgba(255, 255, 255, 0.16);
+    --glass-tile-hover-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.14), 0 1px 3px rgba(0, 0, 0, 0.35);
+    --glass-menu: rgba(40, 40, 44, 0.82);
+    --glass-menu-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 10px 30px rgba(0, 0, 0, 0.45);
+    --glass-dialog-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 20px 50px rgba(0, 0, 0, 0.5);
+    --glass-control: rgba(255, 255, 255, 0.08);
+    --glass-control-on: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Backgrounds: aurora puts translucent tiles over a gradient, paper and mist are flat */
+:root[data-theme="glass"] {
+  --glass-ground: var(--glass-aurora-ground);
+  --glass-tile: var(--glass-translucent-tile);
+  --glass-tile-shadow: var(--glass-translucent-shadow);
+  --glass-filter: blur(20px) saturate(170%);
+}
+
+:root[data-theme="glass"][data-background="paper"],
+:root[data-theme="glass"][data-background="mist"] {
+  --glass-tile: var(--glass-flat-tile);
+  --glass-tile-shadow: none;
+  --glass-filter: none;
+}
+
+:root[data-theme="glass"][data-background="paper"] {
+  --glass-ground: var(--glass-paper-ground);
+}
+
+:root[data-theme="glass"][data-background="mist"] {
+  --glass-ground: var(--glass-mist-ground);
+}
+
+/* Page */
+:root[data-theme="glass"] {
+  min-height: 100%;
+  background: var(--glass-ground);
+  background-attachment: fixed;
+  color: var(--glass-ink);
+}
+
+:root[data-theme="glass"] body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+  max-width: 1240px;
+  font-family: var(--glass-font);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root[data-theme="glass"] #root:empty,
+:root[data-theme="glass"] .BookmarkFolders:empty {
+  background-color: transparent;
+}
+
+:root[data-theme="glass"] .App {
+  row-gap: 24px;
+}
+
+/* Folders */
+:root[data-theme="glass"] .BookmarkFolders {
+  --size-folder-item-gap: 8px;
+  --size-folder-item-min-width: 200px;
+  --size-folder-item-height: 52px;
+  row-gap: 22px;
+}
+
+:root[data-theme="glass"] .BookmarkFolder {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+:root[data-theme="glass"] .BookmarkFolder__Heading {
+  padding: 0 2px;
+  height: 28px;
+  gap: 6px;
+}
+
+:root[data-theme="glass"] .BookmarkFolder__Heading > button {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+:root[data-theme="glass"] .BookmarkFolder__OpenAll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 15px;
+  border-radius: 8px;
+  color: var(--glass-muted);
+  transition: opacity 0.15s ease;
+}
+
+:root[data-theme="glass"] .BookmarkFolder__OpenAll:hover {
+  color: var(--glass-ink);
+  background: var(--glass-tile);
+}
+
+/* Bookmark tiles */
+:root[data-theme="glass"] .BookmarkButton {
+  gap: 4px 10px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border-radius: var(--glass-radius);
+  background: var(--glass-tile);
+  box-shadow: var(--glass-tile-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  color: var(--glass-ink);
+  font-size: 13px;
+  line-height: 16px;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+:root[data-theme="glass"] .BookmarkButton:hover {
+  background: var(--glass-tile-hover);
+  box-shadow: var(--glass-tile-hover-shadow);
+}
+
+:root[data-theme="glass"] .BookmarkButton__Title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+:root[data-theme="glass"] .BookmarkButton__Icon {
+  border-radius: 4px;
+}
+
+:root[data-theme="glass"] .BookmarkButton__Badge {
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 16px;
+  background-color: var(--glass-control);
+  color: var(--glass-muted);
+}
+
+:root[data-theme="glass"] a:focus-visible .BookmarkButton {
+  outline: 2px solid var(--glass-accent);
+  outline-offset: 1px;
+}
+
+:root[data-theme="glass"] .BookmarkEditButton {
+  top: 12px;
+  bottom: auto;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--glass-radius-small);
+  color: var(--glass-muted);
+  font-weight: 600;
+}
+
+:root[data-theme="glass"] .BookmarkEditButton:hover,
+:root[data-theme="glass"] .BookmarkEditButton:focus-visible {
+  background-color: var(--glass-control);
+  color: var(--glass-ink);
+}
+
+/* Drag and drop */
+:root[data-theme="glass"] .Bookmark__DragDrop__To {
+  border-radius: var(--glass-radius);
+}
+
+:root[data-theme="glass"] .Bookmark__DragDrop__To[data-bookmark-drag-state="leave"] {
+  outline: 1.5px dashed color-mix(in srgb, var(--glass-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--glass-accent) 7%, transparent);
+}
+
+:root[data-theme="glass"] .Bookmark__DragDrop__To[data-bookmark-drag-state="enter"] {
+  outline: 2px solid var(--glass-accent);
+}
+
+/* Top sites */
+:root[data-theme="glass"] .TopSites {
+  --size-folder-item-gap: 8px;
+  --size-folder-item-height: 44px;
+}
+
+:root[data-theme="glass"] .TopSiteButton {
+  border-radius: var(--glass-radius);
+  background: var(--glass-tile);
+  box-shadow: var(--glass-tile-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+}
+
+:root[data-theme="glass"] .TopSiteButton:hover {
+  background: var(--glass-tile-hover);
+  box-shadow: var(--glass-tile-hover-shadow);
+}
+
+:root[data-theme="glass"] .TopSiteTitle {
+  border-radius: var(--glass-radius-small);
+}
+
+/* Search */
+:root[data-theme="glass"] .Search {
+  border-radius: var(--glass-radius);
+  background: var(--glass-tile);
+  box-shadow: var(--glass-tile-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+}
+
+/* Footer */
+:root[data-theme="glass"] .App__Footer {
+  gap: 8px;
+  padding-top: 8px;
+}
+
+:root[data-theme="glass"] .App__Footer button {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  border-radius: var(--glass-radius);
+  background: var(--glass-tile);
+  box-shadow: var(--glass-tile-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  cursor: pointer;
+}
+
+:root[data-theme="glass"] .App__Footer button:enabled:hover {
+  background: var(--glass-tile-hover);
+  box-shadow: var(--glass-tile-hover-shadow);
+}
+
+:root[data-theme="glass"] .App__Footer button:disabled {
+  color: var(--glass-muted);
+  cursor: default;
+}
+
+/* Context menu: macOS menu shape */
+:root[data-theme="glass"] .ContextMenu {
+  min-width: 200px;
+  padding: 5px;
+  border-radius: var(--glass-radius);
+  background: var(--glass-menu);
+  box-shadow: var(--glass-menu-shadow);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+}
+
+:root[data-theme="glass"] .ContextMenu__Item {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--glass-radius-small);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--glass-ink);
+}
+
+:root[data-theme="glass"] .ContextMenu__Item:hover,
+:root[data-theme="glass"] .ContextMenu__Item:focus-visible {
+  outline: none;
+  background-color: var(--glass-accent);
+  color: #ffffff;
+}
+
+/* Dialogs */
+:root[data-theme="glass"] dialog.Preferences,
+:root[data-theme="glass"] dialog.BookmarkEditor {
+  border-radius: var(--glass-radius-dialog);
+  background: var(--glass-menu);
+  box-shadow: var(--glass-dialog-shadow);
+  -webkit-backdrop-filter: blur(36px) saturate(180%);
+  backdrop-filter: blur(36px) saturate(180%);
+}
+
+:root[data-theme="glass"] dialog.Preferences::backdrop,
+:root[data-theme="glass"] dialog.BookmarkEditor::backdrop {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="glass"] .Preferences h2 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: none;
+  color: var(--glass-muted);
+}
+
+:root[data-theme="glass"] .Preferences label,
+:root[data-theme="glass"] .Preferences button,
+:root[data-theme="glass"] .Preferences a[href] {
+  border-radius: 8px;
+  background-color: var(--glass-control);
+}
+
+:root[data-theme="glass"] .Preferences label:hover,
+:root[data-theme="glass"] .Preferences button:hover,
+:root[data-theme="glass"] .Preferences a[href]:hover {
+  background-color: var(--glass-control-on);
+}
+
+:root[data-theme="glass"] .Preferences label:has(input:checked) {
+  background-color: var(--glass-control-on);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="glass"] .BookmarkEditor input[type="text"],
+:root[data-theme="glass"] .BookmarkEditor input[type="button"],
+:root[data-theme="glass"] .BookmarkEditor input[type="submit"] {
+  border-radius: 8px;
+  border-color: var(--glass-divider);
+  background-color: var(--glass-control);
+}
+
+/* Background picker (only shown with the glass theme) */
+.Preferences .Themes__Background {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Themes__BackgroundSwatch {
+  display: inline-block;
+  width: 28px;
+  height: 18px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+}
+
+.Themes__BackgroundSwatch[data-background-swatch="aurora"] {
+  background:
+    radial-gradient(24px 16px at 0% 0%, rgba(158, 172, 255, 0.9), transparent 80%),
+    radial-gradient(20px 16px at 100% 40%, rgba(130, 214, 232, 0.8), transparent 80%),
+    radial-gradient(24px 16px at 60% 110%, rgba(196, 168, 255, 0.8), transparent 80%), #eef0f8;
+}
+
+.Themes__BackgroundSwatch[data-background-swatch="paper"] {
+  background: var(--glass-paper-ground);
+}
+
+.Themes__BackgroundSwatch[data-background-swatch="mist"] {
+  background: var(--glass-mist-ground);
+}

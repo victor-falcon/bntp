@@ -1,11 +1,12 @@
 import type { FC } from 'react'
-import { allColorSchemes, allThemes } from './model'
-import { useSelectedColorScheme, useSelectedTheme } from './repository'
-import { useThemeStyle } from './style'
+import { allBackgrounds, allColorSchemes, allThemes } from './model'
+import { useSelectedBackground, useSelectedColorScheme, useSelectedTheme } from './repository'
+import { useBackgroundStyle, useThemeStyle } from './style'
 
 const ThemesComponent: FC = () => {
   const [selectedTheme, setSelectedTheme] = useSelectedTheme()
   const [selectedColorScheme, setSelectedColorScheme] = useSelectedColorScheme()
+  const [selectedBackground, setSelectedBackground] = useSelectedBackground()
   return (
     <>
       <form>
@@ -36,6 +37,23 @@ const ThemesComponent: FC = () => {
           </label>
         ))}
       </form>
+      {selectedTheme === 'glass' ? (
+        <form className="Themes__Backgrounds" aria-label="Background">
+          {allBackgrounds.map((background) => (
+            <label key={background} className="Themes__Background">
+              <input
+                type="radio"
+                name="selectedBackground"
+                value={background}
+                checked={background === selectedBackground}
+                onChange={() => setSelectedBackground(background)}
+              />
+              <span className="Themes__BackgroundSwatch" data-background-swatch={background} aria-hidden="true" />
+              {capitalize(background)}
+            </label>
+          ))}
+        </form>
+      ) : null}
     </>
   )
 }
@@ -47,6 +65,8 @@ export default ThemesComponent
 export const SubscribeThemeComponent: FC = () => {
   const [selectedTheme] = useSelectedTheme()
   const [selectedColorScheme] = useSelectedColorScheme()
+  const [selectedBackground] = useSelectedBackground()
   useThemeStyle(selectedTheme, selectedColorScheme)
+  useBackgroundStyle(selectedBackground)
   return null
 }

@@ -1,5 +1,5 @@
 import { type ChromeStorageSpec, useChromeStorageWithCache } from '../infrastructure/chromeStorage'
-import { type ColorScheme, isColorScheme, isTheme, type Theme } from './model'
+import { type Background, type ColorScheme, isBackground, isColorScheme, isTheme, type Theme } from './model'
 
 export const selectedThemeSpec: ChromeStorageSpec<Theme> = {
   areaName: 'sync',
@@ -18,3 +18,12 @@ export const selectedColorSchemeSpec: ChromeStorageSpec<ColorScheme> = {
 }
 
 export const useSelectedColorScheme = () => useChromeStorageWithCache(selectedColorSchemeSpec)
+
+export const selectedBackgroundSpec: ChromeStorageSpec<Background> = {
+  areaName: 'sync',
+  key: 'v3.selectedBackground',
+  defaultValue: 'aurora',
+  isType: isBackground,
+}
+
+export const useSelectedBackground = () => useChromeStorageWithCache(selectedBackgroundSpec)
